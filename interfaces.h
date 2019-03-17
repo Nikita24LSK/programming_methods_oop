@@ -6,6 +6,7 @@ namespace machines {
 	class Transport {
 
 	public:
+		unsigned int enginePower;
 		static Transport *input(ifstream &inp);
 		virtual void input_data(ifstream &inp) = 0;
 		virtual void output_data(ofstream &out) = 0;
@@ -13,7 +14,7 @@ namespace machines {
 	};
 
 	class Truck: public Transport {
-		int loadCapacity, enginePower;
+		unsigned int loadCapacity;
 	public:
 		void input_data(ifstream &inp);
 		void output_data(ofstream &out);
@@ -21,8 +22,7 @@ namespace machines {
 	};
 
 	class Bus: public Transport {
-		short passCapacity;
-		int enginePower;
+		unsigned short passCapacity;
 	public:
 		void input_data(ifstream &inp);
 		void output_data(ofstream &out);
@@ -52,5 +52,3 @@ namespace machines {
 		~RingList();
 	};
 }
-
-
