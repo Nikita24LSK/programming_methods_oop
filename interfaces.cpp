@@ -6,19 +6,19 @@ using namespace std;
 
 namespace machines {
 	void Truck::input_data(ifstream &inp) {
-		inp >> loadCapacity >> enginePower;
+		inp >> loadCapacity >> enginePower >> consumption;
 	}
 
 	void Truck::output_data(ofstream &out) {
-		out << "Truck\tLoad Capacity: " << loadCapacity << "\tEngine Power: " << enginePower << "\n";
+		out << "Truck\tLoad Capacity: " << loadCapacity << "\tEngine Power: " << enginePower << "\tConsumption: " << consumption << "\n";
 	}
 
 	void Bus::input_data(ifstream &inp) {
-		inp >> passCapacity >> enginePower;
+		inp >> passCapacity >> enginePower >> consumption;
 	}
 
 	void Bus::output_data(ofstream &out) {
-		out << "Bus\tPassengers Capacity: " << passCapacity << "\tEngine Power: " << enginePower << "\n";
+		out << "Bus\tPassengers Capacity: " << passCapacity << "\tEngine Power: " << enginePower << "\tConsumption: " << consumption << "\n";
 	}
 
 	Bus::~Bus() {}

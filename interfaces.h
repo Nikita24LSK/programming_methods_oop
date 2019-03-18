@@ -6,6 +6,7 @@ namespace machines {
 	class Transport {
 
 	public:
+		double consumption;
 		unsigned int enginePower;
 		static Transport *input(ifstream &inp);
 		virtual void input_data(ifstream &inp) = 0;
@@ -52,3 +53,5 @@ namespace machines {
 		~RingList();
 	};
 }
+
+
