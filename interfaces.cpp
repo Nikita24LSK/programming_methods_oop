@@ -21,8 +21,17 @@ namespace machines {
 		out << "Bus\tPassengers Capacity: " << passCapacity << "\tEngine Power: " << enginePower << "\n";
 	}
 
+	void Car::input_data(ifstream &inp) {
+		inp >> passCapacity >> enginePower >> maxSpeed;
+	}
+
+	void Car::output_data(ofstream &out) {
+		out << "Car\tPassengers Capacity: " << passCapacity << "\tEngine power: " << enginePower << "\tMax Speed" << maxSpeed << "\n";
+	}
+
 	Bus::~Bus() {}
 	Truck::~Truck() {}
+	Car::~Car() {}
 
 	Transport *Transport::input(ifstream &inp) {
 		Transport *trp;
@@ -35,6 +44,9 @@ namespace machines {
 				break;
 			case 2:
 				trp = new Bus;
+				break;
+			case 3:
+				trp = new Car;
 				break;
 			default:
 				return NULL;

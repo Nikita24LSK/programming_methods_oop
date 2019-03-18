@@ -29,6 +29,14 @@ namespace machines {
 		~Bus();
 	};
 
+	class Car: public Transport {
+		unsigned short passCapacity, maxSpeed;
+	public:
+		void input_data(ifstream &inp);
+		void output_data(ofstream &out);
+		~Car();
+	};
+
 	class NodeOfList {
 
 	public:
@@ -52,3 +60,5 @@ namespace machines {
 		~RingList();
 	};
 }
+
+
