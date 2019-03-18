@@ -10,6 +10,7 @@ namespace machines {
 		static Transport *input(ifstream &inp);
 		virtual void input_data(ifstream &inp) = 0;
 		virtual void output_data(ofstream &out) = 0;
+		virtual double attitude() = 0;
 		virtual ~Transport() {};
 	};
 
@@ -18,6 +19,7 @@ namespace machines {
 	public:
 		void input_data(ifstream &inp);
 		void output_data(ofstream &out);
+		double attitude();
 		~Truck();
 	};
 
@@ -26,6 +28,7 @@ namespace machines {
 	public:
 		void input_data(ifstream &inp);
 		void output_data(ofstream &out);
+		double attitude();
 		~Bus();
 	};
 
@@ -52,3 +55,5 @@ namespace machines {
 		~RingList();
 	};
 }
+
+

@@ -10,7 +10,11 @@ namespace machines {
 	}
 
 	void Truck::output_data(ofstream &out) {
-		out << "Truck\tLoad Capacity: " << loadCapacity << "\tEngine Power: " << enginePower << "\n";
+		out << "Truck\tLoad Capacity: " << loadCapacity << "\tEngine Power: " << enginePower << "\tAttitude: " << attitude() << "\n";
+	}
+
+	double Truck::attitude() {
+		return (double)loadCapacity/(double)enginePower;
 	}
 
 	void Bus::input_data(ifstream &inp) {
@@ -18,7 +22,11 @@ namespace machines {
 	}
 
 	void Bus::output_data(ofstream &out) {
-		out << "Bus\tPassengers Capacity: " << passCapacity << "\tEngine Power: " << enginePower << "\n";
+		out << "Bus\tPassengers Capacity: " << passCapacity << "\tEngine Power: " << enginePower << "\tAttitude: " << attitude() << "\n";
+	}
+
+	double Bus::attitude() {
+		return (double)(passCapacity*75)/(double)enginePower;
 	}
 
 	Bus::~Bus() {}
