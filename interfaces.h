@@ -7,6 +7,7 @@ namespace machines {
 
 	public:
 		unsigned int enginePower;
+		unsigned short passCapacity;
 		static Transport *input(ifstream &inp);
 		virtual void input_data(ifstream &inp) = 0;
 		virtual void output_data(ofstream &out) = 0;
@@ -22,7 +23,6 @@ namespace machines {
 	};
 
 	class Bus: public Transport {
-		unsigned short passCapacity;
 	public:
 		void input_data(ifstream &inp);
 		void output_data(ofstream &out);
@@ -30,7 +30,7 @@ namespace machines {
 	};
 
 	class Car: public Transport {
-		unsigned short passCapacity, maxSpeed;
+		unsigned short maxSpeed;
 	public:
 		void input_data(ifstream &inp);
 		void output_data(ofstream &out);
