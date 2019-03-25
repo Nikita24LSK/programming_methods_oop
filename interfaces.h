@@ -11,6 +11,7 @@ namespace machines {
 		virtual void input_data(ifstream &inp) = 0;
 		virtual void output_data(ofstream &out) = 0;
 		virtual double attitude() = 0;
+		bool compare(Transport *other);
 		virtual ~Transport() {};
 	};
 
@@ -51,6 +52,9 @@ namespace machines {
 		void fill(ifstream &inp);
 		void out(ofstream &out);
 		void clear();
+		void swap(int first, int second);
+		NodeOfList *get_node(int index);
+		void sort(int left=0, int right=-10);
 		RingList();
 		~RingList();
 	};
