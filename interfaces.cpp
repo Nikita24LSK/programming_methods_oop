@@ -34,7 +34,11 @@ namespace machines {
 	}
 
 	void Car::output_data(ofstream &out) {
-		out << "Car\tPassengers Capacity: " << passCapacity << "\tEngine power: " << enginePower << "\tMax Speed" << maxSpeed << "\n";
+		out << "Car\tPassengers Capacity: " << passCapacity << "\tEngine power: " << enginePower << "\tMax Speed" << maxSpeed << "\tAttitude: " << attitude() << "\n";
+	}
+
+	double Car::attitude() {
+		return (double)(passCapacity*75)/(double)enginePower;
 	}
 
 	Bus::~Bus() {}

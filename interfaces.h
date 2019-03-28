@@ -38,6 +38,7 @@ namespace machines {
 	public:
 		void input_data(ifstream &inp);
 		void output_data(ofstream &out);
+		double attitude();
 		~Car();
 	};
 
