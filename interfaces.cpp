@@ -10,7 +10,11 @@ namespace machines {
 	}
 
 	void Truck::output_data(ofstream &out) {
-		out << "Truck\tLoad Capacity: " << loadCapacity << "\tEngine Power: " << enginePower << "\n";
+		out << "Truck\tLoad Capacity: " << loadCapacity << "\tEngine Power: " << enginePower << "\tAttitude: " << attitude() << "\n";
+	}
+
+	double Truck::attitude() {
+		return (double)loadCapacity/(double)enginePower;
 	}
 
 	void Bus::input_data(ifstream &inp) {
@@ -18,7 +22,11 @@ namespace machines {
 	}
 
 	void Bus::output_data(ofstream &out) {
-		out << "Bus\tPassengers Capacity: " << passCapacity << "\tEngine Power: " << enginePower << "\n";
+		out << "Bus\tPassengers Capacity: " << passCapacity << "\tEngine Power: " << enginePower << "\tAttitude: " << attitude() << "\n";
+	}
+
+	double Bus::attitude() {
+		return (double)(passCapacity*75)/(double)enginePower;
 	}
 
 	void Car::input_data(ifstream &inp) {
@@ -54,6 +62,10 @@ namespace machines {
 
 		trp->input_data(inp);
 		return trp;
+	}
+
+	bool Transport::compare(Transport *other) {
+		return attitude() < other->attitude();
 	}
 
 	NodeOfList::~NodeOfList() {
@@ -130,6 +142,51 @@ namespace machines {
 
 	}
 
+	void RingList::sort(int left, int right) {
+
+		int i, last;
+
+		if (right == -10) {
+			right = size-1;
+		}
+
+		if (left >= right) {
+			return;
+		}
+
+		swap(left, (left+right)/2);
+		last = left;
+		for (i = left+1; i <= right; i++) {
+			if (get_node(i)->tr->compare(get_node(left)->tr)) {
+				swap(++last, i);
+			}
+		}
+		swap(left, last);
+		sort(left, last-1);
+		sort(last+1, right);
+		
+	}
+
+	NodeOfList *RingList::get_node(int index) {
+
+		NodeOfList *retNode = head;
+
+		for (int i = 0; i < index; i++) {
+			retNode = retNode->next;
+		}
+
+		return retNode;
+
+	}
+
+	void RingList::swap(int first, int second) {
+		NodeOfList *temp = new NodeOfList;
+
+		temp->tr = get_node(first)->tr;
+		get_node(first)->tr = get_node(second)->tr;
+		get_node(second)->tr = temp->tr;
+	}
+
 	void RingList::clear() {
 		NodeOfList *curNode;
 
@@ -149,5 +206,3 @@ namespace machines {
 		clear();
 	}
 }
-
-
