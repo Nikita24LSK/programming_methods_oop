@@ -6,6 +6,7 @@ namespace machines {
 	class Transport {
 
 	public:
+		double consumption;
 		unsigned int enginePower;
 		unsigned short passCapacity;
 		static Transport *input(ifstream &inp);
