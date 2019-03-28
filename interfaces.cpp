@@ -30,11 +30,11 @@ namespace machines {
 	}
 
 	void Car::input_data(ifstream &inp) {
-		inp >> passCapacity >> enginePower >> maxSpeed;
+		inp >> passCapacity >> enginePower >> maxSpeed >> consumption;
 	}
 
 	void Car::output_data(ofstream &out) {
-		out << "Car\tPassengers Capacity: " << passCapacity << "\tEngine power: " << enginePower << "\tMax Speed" << maxSpeed << "\tAttitude: " << attitude() << "\n";
+		out << "Car\tPassengers Capacity: " << passCapacity << "\tEngine power: " << enginePower << "\tMax Speed" << maxSpeed << "\tConsumption: " << consumption << "\tAttitude: " << attitude() << "\n";
 	}
 
 	double Car::attitude() {
