@@ -5,52 +5,77 @@
 using namespace std;
 
 namespace machines {
+
 	void Truck::input_data(ifstream &inp) {
+
 		inp >> loadCapacity >> enginePower >> consumption;
+
 	}
 
 	void Truck::output_data(ofstream &out) {
+
 		out << "Truck\tLoad Capacity: " << loadCapacity << "\tEngine Power: " << enginePower << "\tConsumption: " << consumption << "\tAttitude: " << attitude() << "\n";
+
 	}
 
 	double Truck::attitude() {
+
 		return (double)loadCapacity/(double)enginePower;
+
 	}
 
 	void Truck::out_truck(ofstream &out) {
+
 		output_data(out);
+
 	}
 
 	void Bus::input_data(ifstream &inp) {
+
 		inp >> passCapacity >> enginePower >> consumption;
+
 	}
 
 	void Bus::output_data(ofstream &out) {
+
 		out << "Bus\tPassengers Capacity: " << passCapacity << "\tEngine Power: " << enginePower << "\tConsumption: " << consumption << "\tAttitude: " << attitude() << "\n";
+
 	}
 
 	double Bus::attitude() {
+
 		return (double)(passCapacity*75)/(double)enginePower;
+
 	}
 
 	void Car::input_data(ifstream &inp) {
+
 		inp >> passCapacity >> enginePower >> maxSpeed >> consumption;
+
 	}
 
 	void Car::output_data(ofstream &out) {
+
 		out << "Car\tPassengers Capacity: " << passCapacity << "\tEngine power: " << enginePower << "\tMax Speed" << maxSpeed << "\tConsumption: " << consumption << "\tAttitude: " << attitude() << "\n";
+
 	}
 
 	void Car::out_truck(ofstream &out) {
+
 		output_data(out);
+
 	}
 
 	double Car::attitude() {
+
 		return (double)(passCapacity*75)/(double)enginePower;
+
 	}
 
 	void Transport::out_truck(ofstream &out) {
+
 		out << "";
+
 	}
 
 	Bus::~Bus() {}
@@ -58,6 +83,7 @@ namespace machines {
 	Car::~Car() {}
 
 	Transport *Transport::input(ifstream &inp) {
+
 		Transport *trp;
 		int key;
 		inp >> key;
@@ -77,44 +103,62 @@ namespace machines {
 		}
 
 		trp->input_data(inp);
+
 		return trp;
+
 	}
 
 	bool Transport::compare(Transport *other) {
+
 		return attitude() < other->attitude();
+
 	}
 
 	NodeOfList::~NodeOfList() {
+
 		tr->~Transport();
+
 	}
 
 	char NodeOfList::fill(ifstream &inp) {
+
 		tr = Transport::input(inp);
 		if (tr == NULL) {
 			return 0;
 		}
-		else
+		else {
 			return 1;
+		}
+
 	}
 
 	void NodeOfList::out(ofstream &out) {
+
 		tr->output_data(out);
+
 	}
 
 	void NodeOfList::out_truck(ofstream &out) {
+
 		tr->out_truck(out);
+
 	}
 
 	RingList::RingList() {
+
 		size = 0;
 		head = NULL;
+
 	}
 
 	void RingList::fill(ifstream &inp) {
+
 		if (head != NULL) {
 			cout << "Error - fill list: list is not empty!\n";
+
 			return;
 		}
+
 		NodeOfList *curNode;
 		NodeOfList *tmpNode = new NodeOfList;
 
@@ -145,10 +189,12 @@ namespace machines {
 	}
 
 	void RingList::out(ofstream &out) {
+
 		NodeOfList *curNode;
 
 		if (head == NULL) {
 			cout << "Error output list: list is empty!\n";
+
 			return;
 		}
 
@@ -191,6 +237,7 @@ namespace machines {
 				swap(++last, i);
 			}
 		}
+
 		swap(left, last);
 		sort(left, last-1);
 		sort(last+1, right);
@@ -210,14 +257,17 @@ namespace machines {
 	}
 
 	void RingList::swap(int first, int second) {
+
 		NodeOfList *temp = new NodeOfList;
 
 		temp->tr = get_node(first)->tr;
 		get_node(first)->tr = get_node(second)->tr;
 		get_node(second)->tr = temp->tr;
+
 	}
 
 	void RingList::clear() {
+
 		NodeOfList *curNode;
 
 		for (int i = size-1; i > 0; i--) {
@@ -230,10 +280,13 @@ namespace machines {
 
 		size = 0;
 		head = NULL;
+
 	}
 
 	RingList::~RingList() {
+
 		clear();
+
 	}
 }
 

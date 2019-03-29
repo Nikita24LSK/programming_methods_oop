@@ -3,8 +3,8 @@
 using namespace std;
 
 namespace machines {
-	class Transport {
 
+	class Transport {
 	public:
 		double consumption;
 		unsigned int enginePower;
@@ -48,7 +48,6 @@ namespace machines {
 	};
 
 	class NodeOfList {
-
 	public:
 		Transport *tr;
 		NodeOfList *next;
