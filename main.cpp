@@ -33,6 +33,10 @@ int main(int argc, char *argv[]) {
 	cout << "Writing information\n";
 	container.out(out);
 	container.fill(inp);
+	cout << "Sorting list\n";
+	container.sort();
+	out << "\nSorting data\n";
+	container.out(out);
 	cout << "Clearing list\n";
 	container.clear();
 	container.out(out);
