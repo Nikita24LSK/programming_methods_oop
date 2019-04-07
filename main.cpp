@@ -30,16 +30,29 @@ int main(int argc, char *argv[]) {
 
 	cout << "Start.\n";
 
+	// Инициализируем экземпляр класса контейнера
 	RingList container;
+
+	// Считываем данные из входного файла
 	cout << "Reading input\n";
 	container.fill(inp);
+
+	// Записываем данные в выходной файл
 	cout << "Writing information\n";
 	container.out(out);
+
+	// Попытка заполнить непустой контейнер
 	container.fill(inp);
+
+	// Сортируем контейнер
 	cout << "Sorting list\n";
 	container.sort();
+
+	// Записываем отсортированные данные в выходной файл
 	out << "\nSorting data\n";
 	container.out(out);
+
+	// Очищаем контейнер
 	cout << "Clearing list\n";
 	container.clear();
 	container.out(out);

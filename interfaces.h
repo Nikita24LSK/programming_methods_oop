@@ -1,5 +1,14 @@
 #include <fstream>
 
+/*
+
+	Файл с описанием классов, используемых в программе.
+
+	Имеется три типа транспорта - грузовик, автобус и автомобиль.
+	В качестве контейнера используется циклический двусвязный список.
+
+*/
+
 using namespace std;
 
 namespace machines {
@@ -13,7 +22,7 @@ namespace machines {
 		virtual void input_data(ifstream &inp) = 0;
 		virtual void output_data(ofstream &out) = 0;
 		virtual void out_truck(ofstream &out);
-		virtual double attitude() = 0;
+		virtual double quotient() = 0;
 		bool compare(Transport *other);
 		virtual ~Transport() {};
 	};
@@ -24,7 +33,7 @@ namespace machines {
 		void input_data(ifstream &inp);
 		void output_data(ofstream &out);
 		void out_truck(ofstream &out);
-		double attitude();
+		double quotient();
 		~Truck();
 	};
 
@@ -33,7 +42,7 @@ namespace machines {
 	public:
 		void input_data(ifstream &inp);
 		void output_data(ofstream &out);
-		double attitude();
+		double quotient();
 		~Bus();
 	};
 
@@ -43,7 +52,7 @@ namespace machines {
 		void input_data(ifstream &inp);
 		void output_data(ofstream &out);
 		void out_truck(ofstream &out);
-		double attitude();
+		double quotient();
 		~Car();
 	};
 
@@ -73,5 +82,3 @@ namespace machines {
 		~RingList();
 	};
 }
-
-

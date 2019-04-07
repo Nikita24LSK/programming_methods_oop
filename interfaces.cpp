@@ -14,13 +14,13 @@ namespace machines {
 
 	void Truck::output_data(ofstream &out) {
 
-		out << "Truck\tLoad Capacity: " << loadCapacity << "\tEngine Power: " << enginePower << "\tConsumption: " << consumption << "\tAttitude: " << attitude() << "\n";
+		out << "Truck\tLoad Capacity: " << loadCapacity << "\tEngine Power: " << enginePower << "\tConsumption: " << consumption << "\tQuotient: " << quotient() << "\n";
 
 	}
 
-	double Truck::attitude() {
+	double Truck::quotient() {
 
-		return (double)loadCapacity/(double)enginePower;
+		return (double)loadCapacity / (double)enginePower;
 
 	}
 
@@ -38,13 +38,13 @@ namespace machines {
 
 	void Bus::output_data(ofstream &out) {
 
-		out << "Bus\tPassengers Capacity: " << passCapacity << "\tEngine Power: " << enginePower << "\tConsumption: " << consumption << "\tAttitude: " << attitude() << "\n";
+		out << "Bus\tPassengers Capacity: " << passCapacity << "\tEngine Power: " << enginePower << "\tConsumption: " << consumption << "\tQuotient: " << quotient() << "\n";
 
 	}
 
-	double Bus::attitude() {
+	double Bus::quotient() {
 
-		return (double)(passCapacity*75)/(double)enginePower;
+		return (double)(passCapacity * 75) / (double)enginePower;
 
 	}
 
@@ -56,7 +56,7 @@ namespace machines {
 
 	void Car::output_data(ofstream &out) {
 
-		out << "Car\tPassengers Capacity: " << passCapacity << "\tEngine power: " << enginePower << "\tMax Speed" << maxSpeed << "\tConsumption: " << consumption << "\tAttitude: " << attitude() << "\n";
+		out << "Car\tPassengers Capacity: " << passCapacity << "\tEngine power: " << enginePower << "\tMax Speed" << maxSpeed << "\tConsumption: " << consumption << "\tQuotient: " << quotient() << "\n";
 
 	}
 
@@ -66,9 +66,9 @@ namespace machines {
 
 	}
 
-	double Car::attitude() {
+	double Car::quotient() {
 
-		return (double)(passCapacity*75)/(double)enginePower;
+		return (double)(passCapacity * 75) / (double)enginePower;
 
 	}
 
@@ -110,7 +110,7 @@ namespace machines {
 
 	bool Transport::compare(Transport *other) {
 
-		return attitude() < other->attitude();
+		return quotient() < other->quotient();
 
 	}
 
@@ -223,7 +223,7 @@ namespace machines {
 		int i, last;
 
 		if (right == -10) {
-			right = size-1;
+			right = size - 1;
 		}
 
 		if (left >= right) {
@@ -232,7 +232,7 @@ namespace machines {
 
 		swap(left, (left+right)/2);
 		last = left;
-		for (i = left+1; i <= right; i++) {
+		for (i=left+1; i <= right; i++) {
 			if (get_node(i)->tr->compare(get_node(left)->tr)) {
 				swap(++last, i);
 			}
@@ -248,7 +248,7 @@ namespace machines {
 
 		NodeOfList *retNode = head;
 
-		for (int i = 0; i < index; i++) {
+		for (int i=0; i < index; i++) {
 			retNode = retNode->next;
 		}
 
@@ -270,9 +270,9 @@ namespace machines {
 
 		NodeOfList *curNode;
 
-		for (int i = size-1; i > 0; i--) {
+		for (int i=size-1; i > 0; i--) {
 			curNode = head;
-			for (int j = 0; j < i; j++) {
+			for (int j=0; j < i; j++) {
 				curNode = curNode->next;
 			}
 			curNode->~NodeOfList();
@@ -288,6 +288,5 @@ namespace machines {
 		clear();
 
 	}
+	
 }
-
-
