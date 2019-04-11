@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
 #include "interfaces.h"
 
 using namespace std;
@@ -19,13 +20,13 @@ int main(int argc, char *argv[]) {
 	if (!inp.is_open()) {
 		cout << "Could not to open input file!\n";
 
-		return 1;
+		exit(1);
 	}
 
 	if (!out.is_open()) {
 		cout << "Could not to open output file!\n";
 		
-		return 1;
+		exit(1);
 	}
 
 	cout << "Start.\n";

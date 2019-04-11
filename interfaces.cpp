@@ -1,14 +1,52 @@
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
 #include "interfaces.h"
 
 using namespace std;
 
 namespace machines {
 
-	void Truck::input_data(ifstream &inp) {
+	bool Truck::input_data(ifstream &inp) {
 
-		inp >> loadCapacity >> enginePower >> consumption;
+		char inp_str[255];
+		int temp_int_val;
+		double temp_double_val;
+
+		if (!(inp >> inp_str)) {
+			cout << "Error! Unexpected end of input!\n";
+			return true;
+		}
+		temp_int_val = atoi(inp_str);
+		if (!temp_int_val) {
+			cout << "Error! Invalid input data: " << inp_str << endl;
+			return true;
+		}
+		loadCapacity = temp_int_val;
+
+		if (!(inp >> inp_str)) {
+			cout << "Error! Unexpected end of input!\n";
+			return true;
+		}
+		temp_int_val = atoi(inp_str);
+		if (!temp_int_val) {
+			cout << "Error! Invalid input data: " << inp_str << endl;
+			return true;
+		}
+		enginePower = temp_int_val;
+
+		if (!(inp >> inp_str)) {
+			cout << "Error! Unexpected end of input!\n";
+			return true;
+		}
+		temp_double_val = atof(inp_str);
+		if (!temp_int_val) {
+			cout << "Error! Invalid input data: " << inp_str << endl;
+			return true;
+		}
+		consumption = temp_double_val;
+
+		return false;
 
 	}
 
@@ -30,9 +68,46 @@ namespace machines {
 
 	}
 
-	void Bus::input_data(ifstream &inp) {
+	bool Bus::input_data(ifstream &inp) {
 
-		inp >> passCapacity >> enginePower >> consumption;
+		char inp_str[255];
+		int temp_int_val;
+		double temp_double_val;
+
+		if (!(inp >> inp_str)) {
+			cout << "Error! Unexpected end of input!\n";
+			return true;
+		}
+		temp_int_val = atoi(inp_str);
+		if (!temp_int_val) {
+			cout << "Error! Invalid input data: " << inp_str << endl;
+			return true;
+		}
+		passCapacity = temp_int_val;
+
+		if (!(inp >> inp_str)) {
+			cout << "Error! Unexpected end of input!\n";
+			return true;
+		}
+		temp_int_val = atoi(inp_str);
+		if (!temp_int_val) {
+			cout << "Error! Invalid input data: " << inp_str << endl;
+			return true;
+		}
+		enginePower = temp_int_val;
+
+		if (!(inp >> inp_str)) {
+			cout << "Error! Unexpected end of input!\n";
+			return true;
+		}
+		temp_double_val = atof(inp_str);
+		if (!temp_int_val) {
+			cout << "Error! Invalid input data: " << inp_str << endl;
+			return true;
+		}
+		consumption = temp_double_val;
+
+		return false;
 
 	}
 
@@ -48,9 +123,57 @@ namespace machines {
 
 	}
 
-	void Car::input_data(ifstream &inp) {
+	bool Car::input_data(ifstream &inp) {
 
-		inp >> passCapacity >> enginePower >> maxSpeed >> consumption;
+		char inp_str[255];
+		int temp_int_val;
+		double temp_double_val;
+
+		if (!(inp >> inp_str)) {
+			cout << "Error! Unexpected end of input!\n";
+			return true;
+		}
+		temp_int_val = atoi(inp_str);
+		if (!temp_int_val) {
+			cout << "Error! Invalid input data: " << inp_str << endl;
+			return true;
+		}
+		passCapacity = temp_int_val;
+
+		if (!(inp >> inp_str)) {
+			cout << "Error! Unexpected end of input!\n";
+			return true;
+		}
+		temp_int_val = atoi(inp_str);
+		if (!temp_int_val) {
+			cout << "Error! Invalid input data: " << inp_str << endl;
+			return true;
+		}
+		enginePower = temp_int_val;
+
+		if (!(inp >> inp_str)) {
+			cout << "Error! Unexpected end of input!\n";
+			return true;
+		}
+		temp_int_val = atoi(inp_str);
+		if (!temp_int_val) {
+			cout << "Error! Invalid input data: " << inp_str << endl;
+			return true;
+		}
+		maxSpeed = temp_int_val;
+
+		if (!(inp >> inp_str)) {
+			cout << "Error! Unexpected end of input!\n";
+			return true;
+		}
+		temp_double_val = atof(inp_str);
+		if (!temp_int_val) {
+			cout << "Error! Invalid input data: " << inp_str << endl;
+			return true;
+		}
+		consumption = temp_double_val;
+
+		return false;
 
 	}
 
@@ -86,7 +209,9 @@ namespace machines {
 
 		Transport *trp;
 		int key;
-		inp >> key;
+		if (!(inp >> key)) {
+			return NULL;
+		}
 
 		switch (key) {
 			case 1:
@@ -99,10 +224,14 @@ namespace machines {
 				trp = new Car;
 				break;
 			default:
-				return NULL;
+				cout << "Error! Invalid key: " << key;
+				exit(1);
 		}
 
-		trp->input_data(inp);
+		if (trp->input_data(inp)) {
+			delete trp;
+			exit(1);
+		}
 
 		return trp;
 
@@ -123,6 +252,7 @@ namespace machines {
 	char NodeOfList::fill(ifstream &inp) {
 
 		tr = Transport::input(inp);
+
 		if (tr == NULL) {
 			return 0;
 		}
@@ -171,11 +301,9 @@ namespace machines {
 			tmpNode = NULL;
 			tmpNode = new NodeOfList;
 		}
-		else {
-			return;
-		}
 
 		while(tmpNode->fill(inp)) {
+
 			tmpNode->prev = head->prev;
 			head->prev->next = tmpNode;
 			head->prev = tmpNode;
