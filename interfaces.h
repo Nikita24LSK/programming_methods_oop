@@ -20,8 +20,8 @@ namespace machines {
 		unsigned short passCapacity;
 		static Transport *input(ifstream &inp);
 		virtual bool input_data(ifstream &inp) = 0;
-		virtual void output_data(ofstream &out) = 0;
-		virtual void out_truck(ofstream &out);
+		virtual bool output_data(ofstream &out) = 0;
+		virtual bool out_truck(ofstream &out);
 		virtual double quotient() = 0;
 		bool compare(Transport *other);
 		virtual ~Transport() {};
@@ -31,8 +31,8 @@ namespace machines {
 		unsigned int loadCapacity;
 	public:
 		bool input_data(ifstream &inp);
-		void output_data(ofstream &out);
-		void out_truck(ofstream &out);
+		bool output_data(ofstream &out);
+		bool out_truck(ofstream &out);
 		double quotient();
 		~Truck();
 	};
@@ -41,7 +41,7 @@ namespace machines {
 		unsigned short passCapacity;
 	public:
 		bool input_data(ifstream &inp);
-		void output_data(ofstream &out);
+		bool output_data(ofstream &out);
 		double quotient();
 		~Bus();
 	};
@@ -50,8 +50,8 @@ namespace machines {
 		unsigned short maxSpeed;
 	public:
 		bool input_data(ifstream &inp);
-		void output_data(ofstream &out);
-		void out_truck(ofstream &out);
+		bool output_data(ofstream &out);
+		bool out_truck(ofstream &out);
 		double quotient();
 		~Car();
 	};
@@ -63,17 +63,17 @@ namespace machines {
 		NodeOfList *prev;
 
 		~NodeOfList();
-		char fill(ifstream &inp);
-		void out(ofstream &out);
-		void out_truck(ofstream &out);
+		bool fill(ifstream &inp);
+		bool out(ofstream &out);
+		bool out_truck(ofstream &out);
 	};
 
 	class RingList {
+	public:
 		int size;
 		NodeOfList *head;
-	public:
 		void fill(ifstream &inp);
-		void out(ofstream &out);
+		bool out(ofstream &out);
 		void clear();
 		void swap(int first, int second);
 		NodeOfList *get_node(int index);

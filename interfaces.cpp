@@ -50,9 +50,11 @@ namespace machines {
 
 	}
 
-	void Truck::output_data(ofstream &out) {
+	bool Truck::output_data(ofstream &out) {
 
 		out << "Truck\tLoad Capacity: " << loadCapacity << "\tEngine Power: " << enginePower << "\tConsumption: " << consumption << "\tQuotient: " << quotient() << "\n";
+
+		return out.fail();
 
 	}
 
@@ -62,9 +64,13 @@ namespace machines {
 
 	}
 
-	void Truck::out_truck(ofstream &out) {
+	bool Truck::out_truck(ofstream &out) {
 
-		output_data(out);
+		if (output_data(out)) {
+			return true;
+		}
+
+		return false;
 
 	}
 
@@ -111,9 +117,11 @@ namespace machines {
 
 	}
 
-	void Bus::output_data(ofstream &out) {
+	bool Bus::output_data(ofstream &out) {
 
 		out << "Bus\tPassengers Capacity: " << passCapacity << "\tEngine Power: " << enginePower << "\tConsumption: " << consumption << "\tQuotient: " << quotient() << "\n";
+
+		return out.fail();
 
 	}
 
@@ -177,15 +185,21 @@ namespace machines {
 
 	}
 
-	void Car::output_data(ofstream &out) {
+	bool Car::output_data(ofstream &out) {
 
 		out << "Car\tPassengers Capacity: " << passCapacity << "\tEngine power: " << enginePower << "\tMax Speed" << maxSpeed << "\tConsumption: " << consumption << "\tQuotient: " << quotient() << "\n";
 
+		return out.fail();
+
 	}
 
-	void Car::out_truck(ofstream &out) {
+	bool Car::out_truck(ofstream &out) {
 
-		output_data(out);
+		if (output_data(out)) {
+			return true;
+		}
+
+		return false;
 
 	}
 
@@ -195,9 +209,11 @@ namespace machines {
 
 	}
 
-	void Transport::out_truck(ofstream &out) {
+	bool Transport::out_truck(ofstream &out) {
 
 		out << "";
+
+		return out.fail();
 
 	}
 
@@ -249,28 +265,36 @@ namespace machines {
 
 	}
 
-	char NodeOfList::fill(ifstream &inp) {
+	bool NodeOfList::fill(ifstream &inp) {
 
 		tr = Transport::input(inp);
 
 		if (tr == NULL) {
-			return 0;
+			return false;
 		}
 		else {
-			return 1;
+			return true;
 		}
 
 	}
 
-	void NodeOfList::out(ofstream &out) {
+	bool NodeOfList::out(ofstream &out) {
 
-		tr->output_data(out);
+		if (tr->output_data(out)) {
+			return true;
+		}
+
+		return false;
 
 	}
 
-	void NodeOfList::out_truck(ofstream &out) {
+	bool NodeOfList::out_truck(ofstream &out) {
 
-		tr->out_truck(out);
+		if (tr->out_truck(out)) {
+			return true;
+		}
+
+		return false;
 
 	}
 
@@ -316,14 +340,14 @@ namespace machines {
 
 	}
 
-	void RingList::out(ofstream &out) {
+	bool RingList::out(ofstream &out) {
 
 		NodeOfList *curNode;
 
 		if (head == NULL) {
 			cout << "Error output list: list is empty!\n";
 
-			return;
+			return true;
 		}
 
 		for (int i = 0; i < size; i++) {
@@ -331,7 +355,11 @@ namespace machines {
 			for (int j = 0; j < i; j++) {
 				curNode = curNode->next;
 			}
-			curNode->out(out);
+			if (curNode->out(out)) {
+				cout << "Cannot to output tarnsport!\n";
+
+				return true;
+			}
 		}
 
 		out << "\nOutput without bus\n";
@@ -341,8 +369,14 @@ namespace machines {
 			for (int j = 0; j < i; j++) {
 				curNode = curNode->next;
 			}
-			curNode->out_truck(out);
+			if (curNode->out_truck(out)) {
+				cout << "Cannot to output transport!\n";
+
+				return true;
+			}
 		}
+
+		return false;
 
 	}
 
