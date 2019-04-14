@@ -7,6 +7,30 @@ using namespace std;
 
 namespace machines {
 
+	void Truck::multimethod(Transport *other, ofstream &out) {
+
+		other->mm_truck(out);
+
+	}
+
+	void Truck::mm_truck(ofstream &out) {
+
+		cout << "Truck and truck\n";
+
+	}
+
+	void Truck::mm_bus(ofstream &out) {
+
+		cout << "Bus and truck\n";
+
+	}
+
+	void Truck::mm_car(ofstream &out) {
+
+		cout << "Car and truck\n";
+
+	}
+
 	bool Truck::input_data(ifstream &inp) {
 
 		char inp_str[255];
@@ -74,6 +98,30 @@ namespace machines {
 
 	}
 
+	void Bus::multimethod(Transport *other, ofstream &out) {
+
+		other->mm_bus(out);
+
+	}
+
+	void Bus::mm_bus(ofstream &out) {
+
+		out << "Bus and bus\n";
+
+	}
+
+	void Bus::mm_truck(ofstream &out) {
+
+		out << "Truck and bus\n";
+
+	}
+
+	void Bus::mm_car(ofstream &out) {
+
+		out << "Car and bus\n";
+
+	}
+
 	bool Bus::input_data(ifstream &inp) {
 
 		char inp_str[255];
@@ -128,6 +176,30 @@ namespace machines {
 	double Bus::quotient() {
 
 		return (double)(passCapacity * 75) / (double)enginePower;
+
+	}
+
+	void Car::multimethod(Transport *other, ofstream &out) {
+
+		other->mm_car(out);
+
+	}
+
+	void Car::mm_car(ofstream &out) {
+
+		out << "Car and car\n";
+
+	}
+
+	void Car::mm_truck(ofstream &out) {
+
+		out << "Truck and car\n";
+
+	}
+
+	void Car::mm_bus(ofstream &out) {
+
+		out << "Bus and car\n";
 
 	}
 
@@ -377,6 +449,20 @@ namespace machines {
 		}
 
 		return false;
+
+	}
+
+	void RingList::multimethod(ofstream &out) {
+
+		out << "Multimethod\n";
+
+		for (int i=0; i < size-1; i++) {
+			for (int j=i+1; j < size; j++) {
+				get_node(i)->tr->multimethod(get_node(j)->tr, out);
+				get_node(i)->out(out);
+				get_node(j)->out(out);
+			}
+		}
 
 	}
 

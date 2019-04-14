@@ -22,6 +22,10 @@ namespace machines {
 		virtual bool input_data(ifstream &inp) = 0;
 		virtual bool output_data(ofstream &out) = 0;
 		virtual bool out_truck(ofstream &out);
+		virtual void multimethod(Transport *other, ofstream &out) = 0;
+		virtual void mm_truck(ofstream &out) = 0;
+		virtual void mm_bus(ofstream &out) = 0;
+		virtual void mm_car(ofstream &out) = 0;
 		virtual double quotient() = 0;
 		bool compare(Transport *other);
 		virtual ~Transport() {};
@@ -33,6 +37,10 @@ namespace machines {
 		bool input_data(ifstream &inp);
 		bool output_data(ofstream &out);
 		bool out_truck(ofstream &out);
+		void multimethod(Transport *other, ofstream &out);
+		void mm_truck(ofstream &out);
+		void mm_bus(ofstream &out);
+		void mm_car(ofstream &out);
 		double quotient();
 		~Truck();
 	};
@@ -42,6 +50,10 @@ namespace machines {
 	public:
 		bool input_data(ifstream &inp);
 		bool output_data(ofstream &out);
+		void multimethod(Transport *other, ofstream &out);
+		void mm_truck(ofstream &out);
+		void mm_bus(ofstream &out);
+		void mm_car(ofstream &out);
 		double quotient();
 		~Bus();
 	};
@@ -52,6 +64,10 @@ namespace machines {
 		bool input_data(ifstream &inp);
 		bool output_data(ofstream &out);
 		bool out_truck(ofstream &out);
+		void multimethod(Transport *other, ofstream &out);
+		void mm_truck(ofstream &out);
+		void mm_bus(ofstream &out);
+		void mm_car(ofstream &out);
 		double quotient();
 		~Car();
 	};
@@ -78,6 +94,7 @@ namespace machines {
 		void swap(int first, int second);
 		NodeOfList *get_node(int index);
 		void sort(int left=0, int right=-10);
+		void multimethod(ofstream &out);
 		RingList();
 		~RingList();
 	};

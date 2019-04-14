@@ -53,6 +53,9 @@ int main(int argc, char *argv[]) {
 	out << "\nSorting data\n";
 	container.out(out);
 
+	// Вызываем мультиметод контейнера
+	container.multimethod(out);
+
 	// Очищаем контейнер
 	cout << "Clearing list\n";
 	container.clear();
