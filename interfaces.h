@@ -9,6 +9,9 @@ namespace machines {
 		static Transport *input(ifstream &inp);
 		virtual void input_data(ifstream &inp) = 0;
 		virtual void output_data(ofstream &out) = 0;
+		virtual void multimethod(Transport *other, ofstream &out) = 0;
+		virtual void mm_truck(ofstream &out) = 0;
+		virtual void mm_bus(ofstream &out) = 0;
 		virtual ~Transport() {};
 	};
 
@@ -17,6 +20,9 @@ namespace machines {
 	public:
 		void input_data(ifstream &inp);
 		void output_data(ofstream &out);
+		virtual void multimethod(Transport *other, ofstream &out);
+		virtual void mm_truck(ofstream &out);
+		virtual void mm_bus(ofstream &out);
 		~Truck();
 	};
 
@@ -26,6 +32,9 @@ namespace machines {
 	public:
 		void input_data(ifstream &inp);
 		void output_data(ofstream &out);
+		virtual void multimethod(Transport *other, ofstream &out);
+		virtual void mm_truck(ofstream &out);
+		virtual void mm_bus(ofstream &out);
 		~Bus();
 	};
 
@@ -48,6 +57,8 @@ namespace machines {
 		void fill(ifstream &inp);
 		void out(ofstream &out);
 		void clear();
+		void multimethod(ofstream &out);
+		NodeOfList *get_node(int);
 		RingList();
 		~RingList();
 	};

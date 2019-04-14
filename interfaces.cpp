@@ -5,12 +5,37 @@
 using namespace std;
 
 namespace machines {
+
+	void Truck::multimethod(Transport *other, ofstream &out) {
+		other->mm_truck(out);
+	}
+
+	void Truck::mm_truck(ofstream &out) {
+		out << "Truck and truck\n";
+	}
+
+	void Truck::mm_bus(ofstream &out) {
+		out << "Bus and truck\n";
+	}
+
 	void Truck::input_data(ifstream &inp) {
 		inp >> loadCapacity >> enginePower;
 	}
 
 	void Truck::output_data(ofstream &out) {
 		out << "Truck\tLoad Capacity: " << loadCapacity << "\tEngine Power: " << enginePower << "\n";
+	}
+
+	void Bus::multimethod(Transport *other, ofstream &out) {
+		other->mm_bus(out);
+	}
+
+	void Bus::mm_bus(ofstream &out) {
+		out << "Bus and bus\n";
+	}
+
+	void Bus::mm_truck(ofstream &out) {
+		out << "Truck and bus\n";
 	}
 
 	void Bus::input_data(ifstream &inp) {
@@ -100,6 +125,18 @@ namespace machines {
 
 	}
 
+	NodeOfList *RingList::get_node(int index) {
+
+		NodeOfList *retNode = head;
+
+		for (int i=0; i < index; i++) {
+			retNode = retNode->next;
+		}
+
+		return retNode;
+
+	}
+
 	void RingList::out(ofstream &out) {
 		NodeOfList *curNode;
 
@@ -131,6 +168,20 @@ namespace machines {
 
 		size = 0;
 		head = NULL;
+	}
+
+	void RingList::multimethod(ofstream &out) {
+
+		out << "Multimethod\n";
+
+		for (int i=0; i < size-1; i++) {
+			for (int j=i+1; j < size; j++) {
+				get_node(i)->tr->multimethod(get_node(j)->tr, out);
+				get_node(i)->out(out);
+				get_node(j)->out(out);
+			}
+		}
+
 	}
 
 	RingList::~RingList() {
